@@ -7,6 +7,7 @@
         sayHello(tempName);
     }
 
+    //A method to print out a greeting after the user enters their name
     static void sayHello(string tempName)
     {
         Console.WriteLine("Hello, {0}!",tempName);

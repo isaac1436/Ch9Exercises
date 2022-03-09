@@ -3,14 +3,19 @@
     static void Main()
     {
         bool errorCatch;
-        Random r=new Random();
-        int num1=r.Next(0,100), num2=r.Next(0,100),num3;
-        Console.WriteLine("The maximum value between {0} and {1} is {2} ",num1,num2,GetMax(num1, num2));
+        Random r = new Random();
+        int num1 = r.Next(0, 100), num2 = r.Next(0, 100), num3;
 
+        //Use of optional Parameters
+        Console.WriteLine("The maximum value between {0} and {1} is {2} ", num1, num2, GetMax(num1, num2));
+        num3 = r.Next(0, 100);
+
+        //Use of named arguments
+        Console.WriteLine("The maximum value between {0} and {1} is {2} ", num1, num3, GetMax(num1, num2: num2, num3));
 
         Console.Write("Today we'll be finding the maximum value of a list of 3 numbers you will be prompted to enter");
         Console.Write("\n\nEnter the 1st number: ");
-        errorCatch=int.TryParse(Console.ReadLine(), out num1);
+        errorCatch = int.TryParse(Console.ReadLine(), out num1);
 
         Console.Write("\n\nEnter the 2nd number: ");
         errorCatch = int.TryParse(Console.ReadLine(), out num2);
@@ -26,14 +31,16 @@
 
         else
         {
-            Console.WriteLine("\n\nOne of the values entered does not meet the requirements" +
+            Console.WriteLine("\n\n`One of the values entered does not meet the requirements" +
                 "\nPlease try Again Later");
         }
-        
+
     }
 
-    static int GetMax(int num1, int num2, int num3 = int.MinValue)
+    //A method to calculate the maximum value among three numbers which can also be used to calculate for 2 numbers thanks to the rule of named arguments
+    static int GetMax(int num1 = int.MinValue, int num2 = int.MinValue, int num3 = int.MinValue)
     {
+        //setting all three arguments to the minimum value of int allows the use of optional parameters and named arguments
         int max = int.MinValue;
         if (num1 > max)
         {
