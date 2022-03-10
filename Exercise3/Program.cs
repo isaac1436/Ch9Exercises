@@ -9,7 +9,7 @@
 
         if (errorCatch)
         {
-            Console.WriteLine("\n\nThe last digit in {0} is {1} ", num, PrintLastDigit(num));
+            Console.WriteLine("\n\nThe last digit in {0} is {1} ", num, PrintLastDigit(num));//a typical example of calling a method within another method
         }
 
         else
@@ -18,12 +18,14 @@
         }
     }
 
+    //A method to print out the last digit in a number in words
     static string PrintLastDigit(int num)
     {
-        int lastDigit;
-        string lastDigitw;
-        Math.DivRem(num,10,out lastDigit);
+        int lastDigit;//an integer to hold the last digit
+        string lastDigitw;//a string to hold the last digit in words
+        Math.DivRem(num,10,out lastDigit);//using the DIvRem Function we can easily get the last digit
 
+        //Using the switch statement we can also translate the lat digit to a word
         switch (lastDigit)
         {
             case 0:

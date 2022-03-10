@@ -1,14 +1,14 @@
-﻿class Exercise5
+﻿class Exercise5_6
 {
     static void Main()
     {
         bool errorCatch = false, idxErrorCatch;
         Random r = new Random();
         int[] nums = new int[30];
-        int index;
+        int index, element;
         for (int i = 0; i < nums.Length; i++)
         {
-            nums[i] = r.Next(-1000, 1000);
+            nums[i] = r.Next(0, 25);
         }
 
         Console.WriteLine("This is a test to show wether an element of an array is greater than the two beside it");
@@ -22,6 +22,26 @@
             {
                 bool result = IsGreater(index, nums);
                 if (result) { errorCatch = true; }
+            }
+
+            else
+            {
+                Console.WriteLine("Invalid value entered");
+            }
+        }
+
+        errorCatch = false;
+
+        while (errorCatch == false)
+        {
+            Console.Write("\n\nPlease enter a number between 0 and 25: ");
+            idxErrorCatch = int.TryParse(Console.ReadLine(), out element);
+
+            if (element >= 0 && element <= 25)
+            {
+                bool result = firstGreaterOccurence(element, nums);
+                if (result) { errorCatch = true; }
+                else { Console.WriteLine("\n\nThere were no occurences that met the criteria hence the result is: -1"); }
             }
 
             else
@@ -49,5 +69,23 @@
         }
 
         return isGreater;
+    }
+
+    static bool firstGreaterOccurence(int element, int[] nums)
+    {
+        bool firstGreaterOccurence = false;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == element)
+            {
+                if ((element > nums[i + 1]) && (element > nums[i - 1]))
+                {
+                    Console.WriteLine("\n\nThe first occurence of {0} that is greater than both elements at its sides, has an index position of {1}", element, i);
+                    firstGreaterOccurence = true;
+                }
+            }
+        }
+        return firstGreaterOccurence;
     }
 }
