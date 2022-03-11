@@ -2,37 +2,71 @@
 {
     static void Main()
     {
-        //Task 1
         bool errorCatch;
-        int num;
-        Console.Write("Please enter a number: ");
-        errorCatch = int.TryParse(Console.ReadLine(), out num);
-        ReverseInt(num);
+        int num, choice;
 
-        //Task 2
-        int length;
-        Console.Write("\nPlease enter the number of numbers you'll be calculating an average for: ");
-        errorCatch = int.TryParse(Console.ReadLine(), out length);
-        int[] nums = new int[length];
+        Console.WriteLine("There are three tasks available");
+        Console.WriteLine("1.\tTo print out an integer in reverse order");
+        Console.WriteLine("\n2.\tTo calculate the average of a sequence of numbers");
+        Console.WriteLine("\n3.\tTo solve the linear equation \" ax + b = 0 \"");
 
-        Console.WriteLine("\nPlease enter the numbers you're calculating an average of:");
+        Console.Write("\nPlease make a choice: ");
+        errorCatch = int.TryParse(Console.ReadLine(), out choice);
 
-        for (int i = 0; i < length; i++)
+        switch (choice)
         {
-            errorCatch = int.TryParse(Console.ReadLine(), out nums[i]);
+
+            case 1://Task 1
+                Console.Write("Please enter a number: ");
+                errorCatch = int.TryParse(Console.ReadLine(), out num);
+                if (num >= 1 && num <= 50000000)
+                {
+                    ReverseInt(num);
+                }
+                else { Console.WriteLine("Invalid value entered. Please try again later"); }
+                break;
+
+            case 2://Task 2
+                int length;
+                Console.Write("\nPlease enter the number of numbers you'll be calculating an average for: ");
+                errorCatch = int.TryParse(Console.ReadLine(), out length);
+                int[] nums = new int[length];
+
+                if (length > 1)
+                {
+                    Console.WriteLine("\nPlease enter the numbers you're calculating an average of:");
+
+                    for (int i = 0; i < length; i++)
+                    {
+                        errorCatch = int.TryParse(Console.ReadLine(), out nums[i]);
+                    }
+                    Console.WriteLine("\nThe average of the numbers entered is {0}", AverageOf(nums, length));
+                }
+
+                else { Console.WriteLine("\nThe number of elements cannot be 0 or 1. Please try again later"); }
+                break;
+
+            case 3://Task3
+                double a, b;
+                Console.WriteLine("\nThis is a program to solve for \'x\' in the equation \" ax + b = 0 \"");
+                Console.Write("\nPlease enter the value of \'a\' which is the co-efficient of \'x\': ");
+                errorCatch = double.TryParse(Console.ReadLine(), out a);
+                Console.Write("\nPlease enter the value of the constant \'b\': ");
+                errorCatch = double.TryParse(Console.ReadLine(), out b);
+
+                if (a != 0)
+                {
+                    Console.WriteLine("\nThe value of \'x\' is {0}", linEqtn(a, b));
+                }
+
+                else { Console.WriteLine("The co-efficient of \'a\' can not be 0. Please try again later"); }
+
+                break;
+
+            default:
+                Console.WriteLine("Invalid value entered. Please try again later");
+                break;
         }
-        Console.WriteLine("\nThe average of the numbers entered is {0}", AverageOf(nums, length));
-
-        //Task3
-        double a, b;
-        Console.WriteLine("\nThis is a program to solve for \'x\' in the equation \" ax + b = 0 \"");
-        Console.Write("Please enter the value of \'a\' which is the co-efficient of \'x\': ");
-        errorCatch = double.TryParse(Console.ReadLine(), out a);
-        Console.Write("\nPlease enter the value of the constant \'b\': ");
-        errorCatch = double.TryParse(Console.ReadLine(), out b);
-
-        Console.WriteLine("\nThe value of \'x\' is {0}", linEqtn(a, b));
-
     }
 
     static void ReverseInt(int num)
@@ -71,7 +105,16 @@
     static double linEqtn(double a, double b)
     {
         double x;
-        x = (-b) / a;
+
+        if (b < 0 ^ a < 0)
+        {
+            x = Math.Abs(b / a);
+        }
+
+        else
+        {
+            x = -1 * (b / a);
+        }
         return x;
     }
 }
